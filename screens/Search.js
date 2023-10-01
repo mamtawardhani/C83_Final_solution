@@ -11,34 +11,8 @@ import { Avatar, ListItem, Icon } from "react-native-elements";
 import db from "../config";
 
 export default class SearchScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allTransactions: [],
-      searchText: ""
-    };
-  }
-  componentDidMount = async () => {
-    this.getTransactions();
-  };
-
-  getTransactions = () => {
-    db.collection("transactions")
-      .get()
-      .then(snapshot => {
-        snapshot.docs.map(doc => {
-          this.setState({
-            allTransactions: [...this.state.allTransactions, doc.data()],
-            lastVisibleTransaction: doc
-          });
-        });
-      });
-  };
-
   
-
-  
-  renderItem = ({ item, i }) => {
+renderItem = ({ item, i }) => {
     var date = item.date
       .toDate()
       .toString()
@@ -153,11 +127,7 @@ export default class SearchScreen extends Component {
           </View>
         </View>
         <View style={styles.lowerContainer}>
-          <FlatList
-            data={allTransactions}
-            renderItem={this.renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          //add flatlist
         </View>
       </View>
     );
